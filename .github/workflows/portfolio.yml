@@ -1,0 +1,52 @@
+name: portfolio
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: npm ci && npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build and push Docker image
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker buildx create --use
+          docker buildx build \
+            --platform linux/arm64,linux/amd64 \
+            -t markmorcos/portfolio:$IMAGE_TAG \
+            -t markmorcos/portfolio:latest \
+            --push \
+            -f Dockerfile.production \
+            .
+
+      - name: Stream and apply Kubernetes manifests on Pi
+        run: |
+          echo "${{ secrets.RASPBERRY_PI_SSH_KEY }}" > /tmp/id_rsa
+          chmod 600 /tmp/id_rsa
+          for file in $(find k8s -type f -name '*.yaml' | sort); do
+            echo "Applying $file..."
+            ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa ${{ secrets.RASPBERRY_PI_USERNAME }}@${{ secrets.RASPBERRY_PI_HOST }} \
+              "KUBECONFIG=\$HOME/.kube/config kubectl apply -f -" < "$file"
+          done
