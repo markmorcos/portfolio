@@ -1,0 +1,14 @@
+chartVersion: 0.1.3
+projectName: portfolio
+
+ingress:
+  host: mark.onthewifi.com
+  path: /
+  pathType: Prefix
+
+deployment:
+  image: markmorcos/portfolio
+  tag: latest
+
+service:
+  port: 5173

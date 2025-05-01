@@ -41,12 +41,17 @@ jobs:
             -f Dockerfile.production \
             .
 
-      - name: Stream and apply Kubernetes manifests on Pi
+      - name: Deploy to Raspberry Pi using Helm and remote chart
         run: |
           echo "${{ secrets.RASPBERRY_PI_SSH_KEY }}" > /tmp/id_rsa
           chmod 600 /tmp/id_rsa
-          for file in $(find k8s -type f -name '*.yaml' | sort); do
-            echo "Applying $file..."
-            ssh -o StrictHostKeyChecking=no -i /tmp/id_rsa ${{ secrets.RASPBERRY_PI_USERNAME }}@${{ secrets.RASPBERRY_PI_HOST }} \
-              "KUBECONFIG=\$HOME/.kube/config kubectl apply -f -" < "$file"
-          done
+
+          CHART_VERSION=$(grep 'chartVersion:' infrastructure.yaml | cut -d ' ' -f 2)
+
+          cat infrastructure.yaml | ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no \
+            "${{ secrets.RASPBERRY_PI_USERNAME }}@${{ secrets.RASPBERRY_PI_HOST }}" \
+            'export KUBECONFIG=/home/mark/.kube/config && \
+            helm upgrade --install portfolio oci://registry-1.docker.io/${{ secrets.DOCKER_USERNAME }}/base-chart \
+            --version '"${CHART_VERSION}"' \
+            -f - \
+            -n portfolio --create-namespace'
