@@ -38,7 +38,7 @@ jobs:
             -t markmorcos/portfolio:$IMAGE_TAG \
             -t markmorcos/portfolio:latest \
             --push \
-            -f Dockerfile.production \
+            -f Dockerfile \
             .
 
       - name: Deploy to Raspberry Pi using Helm and remote chart

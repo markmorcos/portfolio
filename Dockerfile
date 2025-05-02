@@ -26,9 +26,9 @@ RUN addgroup -S nginxgroup && \
     chown -R nginxuser:nginxgroup /usr/share/nginx/html
 
 USER nginxuser
-EXPOSE 5173
+EXPOSE 80
 
 HEALTHCHECK --interval=30s --timeout=5s \
-  CMD wget --quiet --tries=1 --spider http://localhost:5173/ || exit 1
+  CMD wget --quiet --tries=1 --spider http://localhost/ || exit 1
 
 CMD ["nginx", "-g", "daemon off;"] 
