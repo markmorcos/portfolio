@@ -8,50 +8,14 @@ on:
     branches: [main]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Build
-        run: npm ci && npm run build
-
   deploy:
     runs-on: ubuntu-latest
-    needs: [build]
-    if: github.ref == 'refs/heads/main'
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Build and push Docker image
-        env:
-          IMAGE_TAG: ${{ github.sha }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run: |
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker buildx create --use
-          docker buildx build \
-            --platform linux/arm64,linux/amd64 \
-            -t markmorcos/portfolio:$IMAGE_TAG \
-            -t markmorcos/portfolio:latest \
-            --push \
-            -f Dockerfile \
-            .
-
-      - name: Deploy to Raspberry Pi using Helm and remote chart
-        run: |
-          echo "${{ secrets.RASPBERRY_PI_SSH_KEY }}" > /tmp/id_rsa
-          chmod 600 /tmp/id_rsa
-
-          CHART_VERSION=$(grep 'chartVersion:' infrastructure.yaml | cut -d ' ' -f 2)
-
-          cat infrastructure.yaml | ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no \
-            "${{ secrets.RASPBERRY_PI_USERNAME }}@${{ secrets.RASPBERRY_PI_HOST }}" \
-            'export KUBECONFIG=/home/mark/.kube/config && \
-            helm upgrade --install portfolio oci://registry-1.docker.io/${{ secrets.DOCKER_USERNAME }}/base-chart \
-            --version '"${CHART_VERSION}"' \
-            -f - \
-            -n portfolio --create-namespace'
+      - name: Trigger infrastructure deployment
+        if: github.ref == 'refs/heads/main'
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.INFRASTRUCTURE_TOKEN }}
+          repository: markmorcos/infrastructure
+          event-type: deploy-portfolio
+          client-payload: '{"project_name": "portfolio", "deployment_token": "${{ secrets.DEPLOYMENT_TOKEN }}","deployment_version": "${{ github.sha }}"}'
