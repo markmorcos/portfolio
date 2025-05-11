@@ -1,4 +1,4 @@
-name: portfolio
+name: deploy-portfolio
 
 on:
   workflow_dispatch: {}
@@ -17,8 +17,8 @@ jobs:
           event-type: deploy-portfolio
           client-payload: |-
             {
-              "project_name": "portfolio",
-              "deployment_token": "${{ secrets.DEPLOYMENT_TOKEN }}",
-              "deployment_version": "${{ github.sha }}",
-              "repository_name": "markmorcos/portfolio"
+              "repository": "markmorcos/portfolio",
+              "token": "${{ secrets.DEPLOYMENT_TOKEN }}",
+              "version": "${{ github.sha }}",
+              "config_file": "deployment.yaml"
             }
