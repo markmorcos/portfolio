@@ -12,7 +12,7 @@ jobs:
       - name: Trigger infrastructure deployment
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.INFRASTRUCTURE_TOKEN }}
+          token: ${{ secrets.INFRASTRUCTURE_PAT }}
           repository: markmorcos/infrastructure
           event-type: deploy-portfolio
           client-payload: |-
