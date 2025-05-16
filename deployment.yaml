@@ -16,7 +16,7 @@ ingress:
       serviceName: portfolio-service
 
 deployments:
-  - name: portfolio
+  - name: portfolio-deployment
     image: markmorcos/portfolio
 
 services:
