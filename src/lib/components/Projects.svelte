@@ -10,7 +10,7 @@
   <h2>Featured projects</h2>
   <div class="projects-grid">
     <div class="project-card">
-      <h3>Home Server</h3>
+      <h3>Infrastructure as Code</h3>
       <p>A self-hosted cloud solution for personal data management</p>
       <a
         href="https://github.com/markmorcos/infrastructure"
@@ -23,6 +23,15 @@
       <p>This modern, responsive portfolio built with Svelte</p>
       <a
         href="https://github.com/markmorcos/portfolio"
+        target="_blank"
+        class="project-link">View project →</a
+      >
+    </div>
+    <div class="project-card">
+      <h3>Booking System</h3>
+      <p>A booking system for private people</p>
+      <a
+        href="https://github.com/markmorcos/booking"
         target="_blank"
         class="project-link">View project →</a
       >
