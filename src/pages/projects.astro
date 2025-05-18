@@ -23,13 +23,22 @@ const projects = [
     image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&q=80',
     link: 'https://github.com/markmorcos/booking',
     tags: ['React', 'Node.js', 'MongoDB']
+  },
+  {
+    title: 'Ticketing System',
+    description: 'A ticketing system for small events and concerts',
+    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&q=80',
+    link: 'https://github.com/markmorcos/ticketing',
+    tags: ['Microservices', 'Angular', 'Next.js', 'React', 'TypeScript', 'Node.js', 'MongoDB']
   }
 ];
----
 
-<Layout title="Projects">
+const title = "Projects - Mark Morcos | Senior Software Engineer";
+const description = "Explore my featured software engineering projects, including infrastructure automation, web applications, and cloud solutions. Each project showcases different aspects of my technical expertise.";
+---
+<Layout {title} {description}>
   <Navigation />
-  
+
   <main class="py-10">
     <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-10">
       Featured Projects

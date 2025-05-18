@@ -30,7 +30,7 @@ const education = [
   },
   {
     year: '1998',
-    degree: 'IGCSE',
+    degree: 'Cambridge IGCSE',
     institution: 'New Ramses College',
     location: 'Cairo, Egypt'
   }
@@ -66,9 +66,12 @@ const experience = [
     skills: ['React', 'React Native', 'TypeScript', 'Node.js', 'Unit testing (TDD)', 'NoSQL', 'CI/CD (Travis)']
   }
 ];
+
+const title = "About - Mark Morcos | Senior Software Engineer";
+const description = "Learn about my journey as a Senior Software Engineer, my technical skills, educational background, and professional experience at companies like Doctolib, Shopify, and Klarna.";
 ---
 
-<Layout title="About">
+<Layout {title} {description}>
   <Navigation />
   
   <main class="py-10">
@@ -106,27 +109,6 @@ const experience = [
 
     <section class="mb-16">
       <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-        Education
-      </h2>
-      <div class="space-y-8">
-        {education.map(edu => (
-          <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-            <div class="flex flex-wrap items-baseline gap-x-2">
-              <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">{edu.year}</span>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{edu.degree}</h3>
-            </div>
-            <div class="mt-2 text-gray-600 dark:text-gray-300">
-              <p>{edu.institution}</p>
-              <p>{edu.location}</p>
-              {edu.details && <p class="mt-2 text-sm">{edu.details}</p>}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
         Experience
       </h2>
       <div class="space-y-8">
@@ -144,6 +126,27 @@ const experience = [
                   {skill}
                 </span>
               ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+        Education
+      </h2>
+      <div class="space-y-8">
+        {education.map(edu => (
+          <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <div class="flex flex-wrap items-baseline gap-x-2">
+              <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">{edu.year}</span>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{edu.degree}</h3>
+            </div>
+            <div class="mt-2 text-gray-600 dark:text-gray-300">
+              <p>{edu.institution}</p>
+              <p>{edu.location}</p>
+              {edu.details && <p class="mt-2 text-sm">{edu.details}</p>}
             </div>
           </div>
         ))}
