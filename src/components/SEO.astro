@@ -1,0 +1,77 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonicalURL?: string;
+}
+
+const {
+  title,
+  description,
+  image = '/images/og-image.jpg',
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+} = Astro.props;
+
+const siteTitle = 'Mark Morcos - Software Engineer';
+const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Mark Morcos",
+  jobTitle: "Senior Software Engineer",
+  url: Astro.site?.href,
+  sameAs: [
+    "https://github.com/markmorcos",
+    "https://linkedin.com/in/markmorcos"
+  ],
+  worksFor: {
+    "@type": "Organization",
+    name: "Doctolib"
+  },
+  alumniOf: [
+    {
+      "@type": "Organization",
+      name: "Shopify"
+    },
+    {
+      "@type": "Organization",
+      name: "Klarna"
+    },
+    {
+      "@type": "EducationalOrganization",
+      name: "German University in Cairo"
+    }
+  ]
+};
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<meta name="generator" content={Astro.generator} />
+
+<link rel="canonical" href={canonicalURL} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.site)} />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={fullTitle} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.site)} />
+
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

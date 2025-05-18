@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+
+const contactLinks = [
+  {
+    icon: '📧',
+    text: 'Email me',
+    href: 'mailto:mark.yehia@gmail.com'
+  },
+  {
+    icon: '💻',
+    text: 'GitHub',
+    href: 'https://github.com/markmorcos'
+  },
+  {
+    icon: '🔗',
+    text: 'LinkedIn',
+    href: 'https://linkedin.com/in/markmorcos'
+  }
+];
+---
+
+<Layout title="Contact - Mark Morcos">
+  <Navigation />
+  
+  <main class="py-10">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-10">
+      Get in Touch
+    </h1>
+    
+    <div class="prose prose-lg dark:prose-invert max-w-none mb-16">
+      <p class="text-gray-600 dark:text-gray-300">
+        I'm always open to discussing new projects, opportunities, or just having a chat
+        about technology. Feel free to reach out through any of the channels below.
+      </p>
+    </div>
+
+    <div class="flex flex-wrap gap-6 justify-center">
+      {contactLinks.map(link => (
+        <a
+          href={link.href}
+          target={link.href.startsWith('mailto:') ? '_self' : '_blank'}
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:-translate-y-1 transition-transform duration-300"
+        >
+          <span class="text-2xl">{link.icon}</span>
+          <span class="text-gray-900 dark:text-white font-medium">{link.text}</span>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout> 

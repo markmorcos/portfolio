@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+
+const projects = [
+  {
+    title: 'Infrastructure as Code',
+    description: 'A self-hosted cloud solution for personal data management',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
+    link: 'https://github.com/markmorcos/infrastructure',
+    tags: ['Raspberry Pi', 'Kubernetes', 'Docker']
+  },
+  {
+    title: 'Portfolio Website',
+    description: 'This modern, responsive portfolio built with Astro',
+    image: 'https://images.unsplash.com/photo-1517134191118-9d595e4c8c2b?auto=format&fit=crop&w=800&q=80',
+    link: 'https://github.com/markmorcos/portfolio',
+    tags: ['Astro', 'TypeScript', 'Tailwind']
+  },
+  {
+    title: 'Booking System',
+    description: 'A booking system for private people',
+    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&q=80',
+    link: 'https://github.com/markmorcos/booking',
+    tags: ['React', 'Node.js', 'MongoDB']
+  }
+];
+---
+
+<Layout title="Projects - Mark Morcos">
+  <Navigation />
+  
+  <main class="py-10">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-10">
+      Featured Projects
+    </h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map(project => (
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+          <img
+            src={project.image}
+            alt={project.title}
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+              {project.title}
+            </h3>
+            <p class="mt-2 text-gray-600 dark:text-gray-300">
+              {project.description}
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              {project.tags.map(tag => (
+                <span class="px-2 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-md text-gray-800 dark:text-gray-200">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-4 inline-block text-indigo-600 dark:text-indigo-400 hover:text-indigo-500"
+            >
+              View Project →
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout> 

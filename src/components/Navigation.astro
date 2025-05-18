@@ -1,0 +1,121 @@
+---
+const navItems = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Contact', href: '/contact' },
+];
+---
+
+<nav class="py-4 relative z-50">
+  <div class="flex items-center justify-between">
+    <a href="/" class="text-2xl font-bold text-gray-800 dark:text-white">
+      Mark Morcos
+    </a>
+    
+    <div class="hidden md:flex space-x-8">
+      {navItems.map(item => (
+        <a
+          href={item.href}
+          class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+        >
+          {item.name}
+        </a>
+      ))}
+    </div>
+    
+    <button
+      id="menuButton"
+      type="button"
+      class="md:hidden rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:hover:bg-gray-800"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open menu</span>
+      <svg
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-gray-900/95">
+    <div class="fixed inset-y-0 right-0 w-full bg-white dark:bg-gray-900 px-4 py-5 overflow-y-auto sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+      <div class="flex items-center justify-between">
+        <a href="/" class="text-2xl font-bold text-gray-800 dark:text-white">
+          Mark Morcos
+        </a>
+        <button
+          id="closeButton"
+          type="button"
+          class="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-300"
+        >
+          <span class="sr-only">Close menu</span>
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="flow-root">
+        <div class="space-y-2 py-6">
+          {navItems.map(item => (
+            <a
+              href={item.href}
+              class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-800"
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const menuButton = document.getElementById('menuButton');
+  const closeButton = document.getElementById('closeButton');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function toggleMenu() {
+    const isExpanded = menuButton?.getAttribute('aria-expanded') === 'true';
+    menuButton?.setAttribute('aria-expanded', String(!isExpanded));
+    mobileMenu?.classList.toggle('hidden');
+    document.body.style.overflow = isExpanded ? '' : 'hidden';
+  }
+
+  menuButton?.addEventListener('click', toggleMenu);
+  closeButton?.addEventListener('click', toggleMenu);
+
+  // Close menu when clicking outside
+  mobileMenu?.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) {
+      toggleMenu();
+    }
+  });
+
+  // Close menu when pressing escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuButton?.getAttribute('aria-expanded') === 'true') {
+      toggleMenu();
+    }
+  });
+</script> 
