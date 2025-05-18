@@ -1,0 +1,101 @@
+{
+  "title": "About - Mark Morcos | Senior Software Engineer",
+  "description": "Learn about my journey as a Senior Software Engineer, my technical skills, educational background, and professional experience at companies like Doctolib, Shopify, and Klarna.",
+  "skills": [
+    {
+      "icon": "💻",
+      "title": "Frontend Development",
+      "description": "React, TypeScript, HTML, CSS"
+    },
+    {
+      "icon": "⚙️",
+      "title": "Backend Development",
+      "description": "Node.js, Ruby on Rails, REST APIs"
+    },
+    {
+      "icon": "🛠️",
+      "title": "DevOps & Cloud",
+      "description": "AWS, Docker, Kubernetes, CI/CD"
+    }
+  ],
+  "experience": [
+    {
+      "period": "Feb. 2025 – present",
+      "role": "Senior Software Engineer",
+      "company": "Doctolib",
+      "description": "Part of a cross-functional team working on electronic prescriptions for German healthcare practitioners.",
+      "skills": [
+        "React",
+        "TypeScript",
+        "Ruby on Rails",
+        "Unit testing (TDD)",
+        "SQL"
+      ]
+    },
+    {
+      "period": "Feb. 2022 – Oct. 2023",
+      "role": "Senior Software Engineer",
+      "company": "Shopify",
+      "description": "Part of a cross-functional team working on various projects as part of the Merchant Services organisation for retail merchants. Led a project related to staff management on the Point of Sale app and regularly updated relevant stakeholders. Mentored new hires and demoed new features for team.",
+      "skills": [
+        "React",
+        "React Native",
+        "TypeScript",
+        "Ruby on Rails",
+        "GraphQL",
+        "Unit testing (TDD)",
+        "SQL",
+        "CI/CD (Buildkite)"
+      ]
+    },
+    {
+      "period": "Jan. 2019 – Jan. 2022",
+      "role": "Senior Software Engineer",
+      "company": "Klarna",
+      "description": "Part of a cross-functional team building the web app for merchant onboarding flow and KYC. Worked on a task force to improve merchant portal UI/UX. Promoted to senior software engineer after 2 years, worked on constructing and maintaining Merchant Onboarding Platform monorepo. Mentored new hires and conducted knowledge sharing sessions for team.",
+      "skills": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Unit testing (TDD)",
+        "DDD",
+        "SQL",
+        "NoSQL",
+        "Docker",
+        "DevOps (AWS)",
+        "CI/CD (Jenkins)",
+        "Nx (monorepo)"
+      ]
+    },
+    {
+      "period": "Mar. 2018 – Dec. 2018",
+      "role": "Software Engineer",
+      "company": "Campai",
+      "description": "Part of a small cross-functional team building a web app for club membership management.",
+      "skills": [
+        "React",
+        "React Native",
+        "TypeScript",
+        "Node.js",
+        "Unit testing (TDD)",
+        "NoSQL",
+        "CI/CD (Travis)"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "year": "2012",
+      "degree": "B.Sc. in Computer Science and Engineering",
+      "institution": "German University in Cairo",
+      "location": "Cairo, Egypt",
+      "details": "Bachelor thesis: Multi-Platform Voucher Module for Mobile Apps, Zoobe GmbH, Berlin, Germany"
+    },
+    {
+      "year": "1998",
+      "degree": "Cambridge IGCSE",
+      "institution": "New Ramses College",
+      "location": "Cairo, Egypt"
+    }
+  ]
+}

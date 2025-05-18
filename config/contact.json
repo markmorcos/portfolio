@@ -1,0 +1,21 @@
+{
+  "title": "Contact - Mark Morcos | Senior Software Engineer",
+  "description": "Get in touch with me to discuss software engineering opportunities, collaborations, or technical discussions. Connect via email, GitHub, or LinkedIn.",
+  "contactLinks": [
+    {
+      "icon": "📧",
+      "text": "Email me",
+      "href": "mailto:mark.yehia@gmail.com"
+    },
+    {
+      "icon": "💻",
+      "text": "GitHub",
+      "href": "https://github.com/markmorcos"
+    },
+    {
+      "icon": "🔗",
+      "text": "LinkedIn",
+      "href": "https://linkedin.com/in/markmorcos"
+    }
+  ]
+}
