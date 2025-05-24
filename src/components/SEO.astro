@@ -9,12 +9,12 @@ interface Props {
 const {
   title,
   description,
-  image = '/images/og-image.jpg',
+  image = '/images/profile.webp',
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 } = Astro.props;
 
-const siteTitle = 'Mark Morcos - Software Engineer';
-const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+const siteTitle = 'Mark Morcos - Senior Software Engineer';
+const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 
 const jsonLd = {
   "@context": "https://schema.org",
