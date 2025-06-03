@@ -5,5 +5,5 @@ export default {
     extend: {},
   },
   plugins: [require("@tailwindcss/typography")],
-  darkMode: "media",
+  darkMode: "class",
 };
