@@ -25,7 +25,6 @@ const {
       <slot />
     </div>
     <script is:inline>
-      // Check for existing theme preference in localStorage or use system preference
       const theme = (() => {
         if (
           typeof localStorage !== "undefined" &&
@@ -38,16 +37,13 @@ const {
           : "light";
       })();
 
-      // Apply theme class to HTML element
       if (theme === "dark") {
         document.documentElement.classList.add("dark");
       } else {
         document.documentElement.classList.remove("dark");
       }
 
-      // Store the theme preference
       localStorage.setItem("theme", theme);
     </script>
   </body>
 </html>
-
