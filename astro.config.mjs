@@ -10,10 +10,9 @@ export default defineConfig({
   integrations: [
     tailwind(),
     mdx(),
-    sitemap({
-      changefreq: "weekly",
-      priority: 0.7,
-      lastmod: new Date(),
-    }),
+    sitemap({ changefreq: "weekly", priority: 0.7, lastmod: new Date() }),
   ],
+  prefetch: true,
+  build: { inlineStylesheets: "auto" },
+  compressHTML: true,
 });

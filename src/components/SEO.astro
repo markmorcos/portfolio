@@ -9,11 +9,11 @@ interface Props {
 const {
   title,
   description,
-  image = '/images/profile.webp',
+  image = "/images/profile.webp",
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 } = Astro.props;
 
-const siteTitle = 'Mark Morcos - Senior Software Engineer';
+const siteTitle = "Mark Morcos - Senior Software Engineer";
 const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 
 const jsonLd = {
@@ -24,26 +24,26 @@ const jsonLd = {
   url: Astro.site?.href,
   sameAs: [
     "https://github.com/markmorcos",
-    "https://linkedin.com/in/markmorcos"
+    "https://linkedin.com/in/markmorcos",
   ],
   worksFor: {
     "@type": "Organization",
-    name: "Doctolib"
+    name: "Doctolib",
   },
   alumniOf: [
     {
       "@type": "Organization",
-      name: "Shopify"
+      name: "Shopify",
     },
     {
       "@type": "Organization",
-      name: "Klarna"
+      name: "Klarna",
     },
     {
       "@type": "EducationalOrganization",
-      name: "German University in Cairo"
-    }
-  ]
+      name: "German University in Cairo",
+    },
+  ],
 };
 ---
 
@@ -71,7 +71,15 @@ const jsonLd = {
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.site)} />
 
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+<meta
+  name="theme-color"
+  content="#ffffff"
+  media="(prefers-color-scheme: light)"
+/>
+<meta
+  name="theme-color"
+  content="#0f172a"
+  media="(prefers-color-scheme: dark)"
+/>
 
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

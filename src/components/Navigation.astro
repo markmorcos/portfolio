@@ -1,21 +1,23 @@
 ---
 const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Contact', href: '/contact' },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Projects", href: "/projects" },
+  { name: "Contact", href: "/contact" },
 ];
 ---
 
 <style>
-  #themeToggle .theme-sun, #mobileThemeToggle .mobile-theme-sun {
+  #themeToggle .theme-sun,
+  #mobileThemeToggle .mobile-theme-sun {
     display: var(--sun-display, block);
   }
-  #themeToggle .theme-moon, #mobileThemeToggle .mobile-theme-moon {
+  #themeToggle .theme-moon,
+  #mobileThemeToggle .mobile-theme-moon {
     display: var(--moon-display, none);
   }
 
-  :global(.dark) #themeToggle .theme-sun, 
+  :global(.dark) #themeToggle .theme-sun,
   :global(.dark) #mobileThemeToggle .mobile-theme-sun {
     display: var(--sun-display, none);
   }
@@ -27,34 +29,63 @@ const navItems = [
 
 <nav class="py-4 relative z-50">
   <div class="flex items-center justify-between">
-    <a href="/" class="text-2xl font-bold text-gray-800 dark:text-white">
+    <a
+      href="/"
+      class="text-2xl font-bold text-gray-800 dark:text-white"
+      data-astro-prefetch
+    >
       Mark Morcos
     </a>
-    
+
     <div class="hidden md:flex space-x-8 items-center">
-      {navItems.map(item => (
-        <a
-          href={item.href}
-          class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-        >
-          {item.name}
-        </a>
-      ))}
-      
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+            data-astro-prefetch
+          >
+            {item.name}
+          </a>
+        ))
+      }
+
       <button
         id="themeToggle"
         aria-label="Toggle Dark Mode"
         class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 theme-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 theme-sun"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+          ></path>
         </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 theme-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 theme-moon"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+          ></path>
         </svg>
       </button>
     </div>
-    
+
     <button
       id="menuButton"
       type="button"
@@ -72,14 +103,15 @@ const navItems = [
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-        />
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
       </svg>
     </button>
   </div>
 
   <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-gray-900/95">
-    <div class="fixed inset-y-0 right-0 w-full bg-white dark:bg-gray-900 px-4 py-5 overflow-y-auto sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+    <div
+      class="fixed inset-y-0 right-0 w-full bg-white dark:bg-gray-900 px-4 py-5 overflow-y-auto sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+    >
       <div class="flex items-center justify-between">
         <a href="/" class="text-2xl font-bold text-gray-800 dark:text-white">
           Mark Morcos
@@ -100,21 +132,22 @@ const navItems = [
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
+              d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
       <div class="flow-root">
         <div class="space-y-2 py-6">
-          {navItems.map(item => (
-            <a
-              href={item.href}
-              class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-800"
-            >
-              {item.name}
-            </a>
-          ))}
+          {
+            navItems.map((item) => (
+              <a
+                href={item.href}
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-800"
+              >
+                {item.name}
+              </a>
+            ))
+          }
           <div class="-mx-3 px-3 py-2">
             <button
               id="mobileThemeToggle"
@@ -123,11 +156,33 @@ const navItems = [
             >
               <span>Toggle Theme</span>
               <span class="p-1 rounded-full bg-gray-100 dark:bg-gray-800">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mobile-theme-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 mobile-theme-sun"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  ></path>
                 </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mobile-theme-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 mobile-theme-moon"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                  ></path>
                 </svg>
               </span>
             </button>
@@ -139,66 +194,73 @@ const navItems = [
 </nav>
 
 <script>
-  const menuButton = document.getElementById('menuButton');
-  const closeButton = document.getElementById('closeButton');
-  const mobileMenu = document.getElementById('mobileMenu');
+  const menuButton = document.getElementById("menuButton");
+  const closeButton = document.getElementById("closeButton");
+  const mobileMenu = document.getElementById("mobileMenu");
 
   function toggleMenu() {
-    const isExpanded = menuButton?.getAttribute('aria-expanded') === 'true';
-    menuButton?.setAttribute('aria-expanded', String(!isExpanded));
-    mobileMenu?.classList.toggle('hidden');
-    document.body.style.overflow = isExpanded ? '' : 'hidden';
+    const isExpanded = menuButton?.getAttribute("aria-expanded") === "true";
+    menuButton?.setAttribute("aria-expanded", String(!isExpanded));
+    mobileMenu?.classList.toggle("hidden");
+    document.body.style.overflow = isExpanded ? "" : "hidden";
   }
 
-  menuButton?.addEventListener('click', toggleMenu);
-  closeButton?.addEventListener('click', toggleMenu);
+  menuButton?.addEventListener("click", toggleMenu);
+  closeButton?.addEventListener("click", toggleMenu);
 
   // Close menu when clicking outside
-  mobileMenu?.addEventListener('click', (e) => {
+  mobileMenu?.addEventListener("click", (e) => {
     if (e.target === mobileMenu) {
       toggleMenu();
     }
   });
 
   // Close menu when pressing escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menuButton?.getAttribute('aria-expanded') === 'true') {
+  document.addEventListener("keydown", (e) => {
+    if (
+      e.key === "Escape" &&
+      menuButton?.getAttribute("aria-expanded") === "true"
+    ) {
       toggleMenu();
     }
   });
 
   // Theme toggle functionality
   const themeButtons = [
-    document.getElementById('themeToggle'),
-    document.getElementById('mobileThemeToggle')
+    document.getElementById("themeToggle"),
+    document.getElementById("mobileThemeToggle"),
   ];
 
   function updateIcons() {
-    const isDark = document.documentElement.classList.contains('dark');
-    
+    const isDark = document.documentElement.classList.contains("dark");
+
     // Update desktop button icons
-    document.querySelector('.theme-sun')?.classList.toggle('hidden', isDark);
-    document.querySelector('.theme-moon')?.classList.toggle('hidden', !isDark);
-    
+    document.querySelector(".theme-sun")?.classList.toggle("hidden", isDark);
+    document.querySelector(".theme-moon")?.classList.toggle("hidden", !isDark);
+
     // Update mobile button icons
-    document.querySelector('.mobile-theme-sun')?.classList.toggle('hidden', isDark);
-    document.querySelector('.mobile-theme-moon')?.classList.toggle('hidden', !isDark);
+    document
+      .querySelector(".mobile-theme-sun")
+      ?.classList.toggle("hidden", isDark);
+    document
+      .querySelector(".mobile-theme-moon")
+      ?.classList.toggle("hidden", !isDark);
   }
 
   function toggleTheme() {
-    const isDark = document.documentElement.classList.contains('dark');
-    document.documentElement.classList.toggle('dark', !isDark);
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    const isDark = document.documentElement.classList.contains("dark");
+    document.documentElement.classList.toggle("dark", !isDark);
+    localStorage.setItem("theme", isDark ? "light" : "dark");
     updateIcons();
   }
 
   // Add event listeners to theme toggle buttons
-  themeButtons.forEach(button => {
+  themeButtons.forEach((button) => {
     if (button) {
-      button.addEventListener('click', toggleTheme);
+      button.addEventListener("click", toggleTheme);
     }
   });
 
   // Set initial icon state on page load
   updateIcons();
-</script> 
+</script>

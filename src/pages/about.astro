@@ -1,23 +1,30 @@
 ---
-import { title, description, skills, experience, education } from '../../config/about.json';
+import {
+  title,
+  description,
+  skills,
+  experience,
+  education,
+} from "../../config/about.json";
 
-import Layout from '../layouts/Layout.astro';
-import Navigation from '../components/Navigation.astro';
+import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
 ---
 
 <Layout {title} {description}>
   <Navigation />
-  
+
   <main class="py-10">
     <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-10">
       About Me
     </h1>
-    
+
     <div class="prose prose-lg dark:prose-invert max-w-none mb-16">
       <p class="text-gray-600 dark:text-gray-300">
-        I'm a passionate software engineer focused on creating beautiful and functional web experiences.
-        With expertise across the full stack and cloud technologies, I love building scalable
-        and maintainable solutions that solve real-world problems.
+        I'm a passionate software engineer focused on creating beautiful and
+        functional web experiences. With expertise across the full stack and
+        cloud technologies, I love building scalable and maintainable solutions
+        that solve real-world problems.
       </p>
     </div>
 
@@ -25,19 +32,21 @@ import Navigation from '../components/Navigation.astro';
       <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
         Skills
       </h2>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {skills.map(skill => (
-          <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:-translate-y-1 transition-transform duration-300">
-            <div class="text-4xl mb-4">{skill.icon}</div>
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              {skill.title}
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300">
-              {skill.description}
-            </p>
-          </div>
-        ))}
+        {
+          skills.map((skill) => (
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:-translate-y-1 transition-transform duration-300">
+              <div class="text-4xl mb-4">{skill.icon}</div>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                {skill.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                {skill.description}
+              </p>
+            </div>
+          ))
+        }
       </div>
     </section>
 
@@ -46,23 +55,34 @@ import Navigation from '../components/Navigation.astro';
         Experience
       </h2>
       <div class="space-y-8">
-        {experience.map(exp => (
-          <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-            <div class="flex flex-wrap items-baseline gap-x-2 mb-2">
-              <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">{exp.period}</span>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{exp.role}</h3>
-              <span class="text-gray-600 dark:text-gray-300">at {exp.company}</span>
-            </div>
-            <p class="text-gray-600 dark:text-gray-300 mb-4">{exp.description}</p>
-            <div class="flex flex-wrap gap-2">
-              {exp.skills && exp.skills.map(skill => (
-                <span class="px-2 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-md text-gray-800 dark:text-gray-200">
-                  {skill}
+        {
+          experience.map((exp) => (
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+              <div class="flex flex-wrap items-baseline gap-x-2 mb-2">
+                <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">
+                  {exp.period}
                 </span>
-              ))}
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                  {exp.role}
+                </h3>
+                <span class="text-gray-600 dark:text-gray-300">
+                  at {exp.company}
+                </span>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                {exp.description}
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {exp.skills &&
+                  exp.skills.map((skill) => (
+                    <span class="px-2 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-md text-gray-800 dark:text-gray-200">
+                      {skill}
+                    </span>
+                  ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </section>
 
@@ -71,20 +91,27 @@ import Navigation from '../components/Navigation.astro';
         Education
       </h2>
       <div class="space-y-8">
-        {education.map(edu => (
-          <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-            <div class="flex flex-wrap items-baseline gap-x-2">
-              <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">{edu.year}</span>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{edu.degree}</h3>
+        {
+          education.map((edu) => (
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+              <div class="flex flex-wrap items-baseline gap-x-2">
+                <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">
+                  {edu.year}
+                </span>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                  {edu.degree}
+                </h3>
+              </div>
+              <div class="mt-2 text-gray-600 dark:text-gray-300">
+                <p>{edu.institution}</p>
+                <p>{edu.location}</p>
+                {edu.details && <p class="mt-2 text-sm">{edu.details}</p>}
+              </div>
             </div>
-            <div class="mt-2 text-gray-600 dark:text-gray-300">
-              <p>{edu.institution}</p>
-              <p>{edu.location}</p>
-              {edu.details && <p class="mt-2 text-sm">{edu.details}</p>}
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </section>
   </main>
-</Layout> 
+</Layout>
+
