@@ -1,24 +1,14 @@
-chartVersion: 0.2.11
+version: 0.4.7
 
-project:
-  name: "portfolio"
-
-repository:
-  name: "markmorcos/portfolio"
-  path: "."
-
-ingress:
-  host: morcos.tech
-  rules:
-    - host: morcos.tech
-      path: /
-      pathType: Prefix
-      serviceName: portfolio-service
-
-deployments:
-  - name: portfolio-deployment
-    image: markmorcos/portfolio
+namespace: portfolio
+project: portfolio
 
 services:
-  - name: portfolio-service
+  - name: portfolio
+    image: markmorcos/portfolio
     port: 80
+
+    ingress:
+      host: morcos.tech
+      path: /
+      pathType: Prefix
