@@ -5,7 +5,7 @@ project: portfolio
 
 services:
   - name: portfolio
-    image: markmorcos/portfolio
+    image: ghcr.io/markmorcos/portfolio
     port: 80
 
     ingress:
