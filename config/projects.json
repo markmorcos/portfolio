@@ -3,40 +3,53 @@
   "description": "Explore my featured software engineering projects, including infrastructure automation, web applications, and cloud solutions. Each project showcases different aspects of my technical expertise.",
   "projects": [
     {
-      "title": "Infrastructure as Code",
-      "description": "A self-hosted cloud solution for personal data management",
-      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+      "title": "Infrastructure",
+      "description": "Helm-based infrastructure-as-a-service running my self-hosted apps on a Raspberry Pi k3s cluster.",
+      "image": "/images/projects/infrastructure.svg",
       "link": "https://github.com/markmorcos/infrastructure",
-      "tags": ["Raspberry Pi", "Kubernetes", "Docker"]
+      "tags": ["Kubernetes", "Helm", "Raspberry Pi", "Docker", "GitHub Actions"]
     },
     {
-      "title": "Portfolio Website",
-      "description": "This modern, responsive portfolio built with Astro",
-      "image": "https://images.unsplash.com/photo-1517134191118-9d595e4c8c2b?auto=format&fit=crop&w=800&q=80",
+      "title": "Portfolio",
+      "description": "This site — a static, dark-mode-aware Astro build deployed as a Docker container behind Nginx.",
+      "image": "/images/projects/portfolio.svg",
       "link": "https://github.com/markmorcos/portfolio",
-      "tags": ["Astro", "TypeScript", "Tailwind"]
+      "tags": ["Astro", "TypeScript", "Tailwind", "MDX", "Docker"]
     },
     {
-      "title": "Booking System",
-      "description": "A booking system for private people",
-      "image": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&q=80",
-      "link": "https://github.com/markmorcos/booking",
-      "tags": ["React", "Node.js", "MongoDB"]
+      "title": "Ma3ady (ميعادي)",
+      "description": "Multi-tenant, mobile-first appointment booking app. Spec-driven, bilingual EN/AR.",
+      "image": "/images/projects/ma3ady.svg",
+      "link": "https://github.com/markmorcos/ma3ady",
+      "tags": ["Expo", "React Native", "Supabase", "TypeScript", "pnpm"]
     },
     {
-      "title": "Ticketing System",
-      "description": "A ticketing system for small events and concerts",
-      "image": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&q=80",
-      "link": "https://github.com/markmorcos/tazaker",
-      "tags": [
-        "Microservices",
-        "Angular",
-        "Next.js",
-        "React",
-        "TypeScript",
-        "Node.js",
-        "MongoDB"
-      ]
+      "title": "St. Mina Connect",
+      "description": "Mobile app for the St. Mina Coptic Orthodox Church (Munich) with magic-link auth and a local Supabase dev stack.",
+      "image": "/images/projects/stminaconnect.svg",
+      "link": "https://github.com/markmorcos/stminaconnect",
+      "tags": ["Expo", "Supabase", "TypeScript", "EAS", "PostgreSQL"]
+    },
+    {
+      "title": "pile.bio",
+      "description": "Production link-in-bio platform with Firebase auth, real-time admin previews over Socket.IO, and a draft/publish workflow.",
+      "image": "/images/projects/pile.svg",
+      "link": "https://github.com/markmorcos/pile",
+      "tags": ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL", "Socket.IO", "Firebase"]
+    },
+    {
+      "title": "Secrets",
+      "description": "Send-once secret sharing with client-side AES-256-GCM encryption — server stores only ciphertext and hashed tokens. Live at secrets.morcos.tech.",
+      "image": "/images/projects/secrets.svg",
+      "link": "https://github.com/markmorcos/secrets",
+      "tags": ["Deno", "PostgreSQL", "Web Crypto", "Kubernetes"]
+    },
+    {
+      "title": "Eventlane",
+      "description": "Real-time event RSVP + waiting list system with optimistic locking and live updates over WebSocket/STOMP.",
+      "image": "/images/projects/eventlane.svg",
+      "link": "https://github.com/markmorcos/eventlane",
+      "tags": ["Kotlin", "Spring Boot", "Angular", "MongoDB", "Firebase", "WebSocket"]
     }
   ]
 }
