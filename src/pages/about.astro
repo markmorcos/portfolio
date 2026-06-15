@@ -1,117 +1,174 @@
 ---
-import {
-  title,
-  description,
-  skills,
-  experience,
-  education,
-} from "../../config/about.json";
-
+import { skills, experience, education } from "../../config/about.json";
 import Layout from "../layouts/Layout.astro";
 import Navigation from "../components/Navigation.astro";
+
+// Scrollytelling About — career as a journey. Milestones reveal on scroll and a
+// central spine fills with progress. Preview route: /about-journey.
+
+const yearOf = (s: string) => (s.match(/\d{4}/) ?? ["—"])[0];
+
+const grad = education.find((e) => e.year === "2012");
+
+type Milestone = {
+  year: string;
+  heading: string;
+  sub: string;
+  body: string;
+  tags: string[];
+  now?: boolean;
+};
+
+const milestones: Milestone[] = [
+  ...(grad
+    ? [{
+        year: "2012",
+        heading: grad.degree,
+        sub: `${grad.institution} · ${grad.location}`,
+        body: grad.details ?? "Where it started.",
+        tags: ["C", "Java", "Algorithms"],
+      }]
+    : []),
+  // experience is newest-first in config; reverse to walk forward in time.
+  ...[...experience].reverse().map((e) => ({
+    year: yearOf(e.period),
+    heading: e.company,
+    sub: `${e.role} · ${e.period}`,
+    body: e.description,
+    tags: e.skills.slice(0, 6),
+    now: /present/i.test(e.period),
+  })),
+];
 ---
 
-<Layout {title} {description}>
+<Layout title="About" description="Mark Morcos — a journey in software, from Cairo to Berlin.">
   <Navigation />
 
-  <main class="py-10">
-    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-10">
-      About Me
-    </h1>
-
-    <div class="prose prose-lg dark:prose-invert max-w-none mb-16">
-      <p class="text-gray-600 dark:text-gray-300">
-        I'm a passionate software engineer focused on creating beautiful and
-        functional web experiences. With expertise across the full stack and
-        cloud technologies, I love building scalable and maintainable solutions
-        that solve real-world problems.
+  <main>
+    <!-- intro -->
+    <section class="flex min-h-[68vh] flex-col justify-center">
+      <p class="font-mono text-sm tracking-widest text-indigo-500 dark:text-indigo-400">// THE JOURNEY</p>
+      <h1 class="mt-3 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
+        From Cairo to Berlin,<br />one commit at a time.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-300">
+        A software engineer's path — the schools, the companies, the things
+        built along the way. Scroll to follow it.
       </p>
-    </div>
-
-    <section class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-        Skills
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {
-          skills.map((skill) => (
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:-translate-y-1 transition-transform duration-300">
-              <div class="text-4xl mb-4">{skill.icon}</div>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                {skill.title}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                {skill.description}
-              </p>
-            </div>
-          ))
-        }
+      <div class="mt-12 flex items-center gap-2 font-mono text-sm text-gray-400 dark:text-gray-500">
+        <span>scroll</span>
+        <span class="animate-bounce">↓</span>
       </div>
     </section>
 
-    <section class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-        Experience
-      </h2>
-      <div class="space-y-8">
-        {
-          experience.map((exp) => (
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <div class="flex flex-wrap items-baseline gap-x-2 mb-2">
-                <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">
-                  {exp.period}
-                </span>
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                  {exp.role}
-                </h3>
-                <span class="text-gray-600 dark:text-gray-300">
-                  at {exp.company}
-                </span>
-              </div>
-              <p class="text-gray-600 dark:text-gray-300 mb-4">
-                {exp.description}
-              </p>
-              <div class="flex flex-wrap gap-2">
-                {exp.skills &&
-                  exp.skills.map((skill) => (
-                    <span class="px-2 py-1 text-sm bg-gray-100 dark:bg-gray-700 rounded-md text-gray-800 dark:text-gray-200">
-                      {skill}
-                    </span>
-                  ))}
-              </div>
+    <!-- timeline -->
+    <section id="timeline" class="relative pb-24">
+      <!-- spine -->
+      <div class="absolute bottom-0 left-4 top-0 w-px bg-gray-200 dark:bg-gray-800 md:left-1/2"></div>
+      <div
+        id="spine-fill"
+        class="absolute left-4 top-0 h-0 w-px bg-gradient-to-b from-indigo-500 to-indigo-300 md:left-1/2"
+      ></div>
+
+      <ol class="space-y-16 md:space-y-28">
+        {milestones.map((m, i) => (
+          <li
+            class={`reveal relative pl-12 md:w-1/2 md:pl-0 ${
+              i % 2 === 0
+                ? "md:ml-0 md:pr-14 md:text-right"
+                : "md:ml-auto md:pl-14"
+            }`}
+            data-side={i % 2 === 0 ? "left" : "right"}
+          >
+            <!-- node -->
+            <span
+              class={`absolute top-1.5 z-10 flex h-3.5 w-3.5 items-center justify-center rounded-full ring-4 ring-white dark:ring-gray-900 left-[9px] md:left-auto ${
+                i % 2 === 0 ? "md:-right-[7px]" : "md:-left-[7px]"
+              } ${m.now ? "bg-indigo-500" : "bg-gray-400 dark:bg-gray-600"}`}
+            >
+              {m.now && <span class="absolute h-3.5 w-3.5 animate-ping rounded-full bg-indigo-500 opacity-60"></span>}
+            </span>
+
+            <div class="text-5xl font-black tracking-tighter text-gray-200 dark:text-gray-800 sm:text-6xl">
+              {m.year}
             </div>
-          ))
-        }
-      </div>
+            <h3 class="-mt-3 text-2xl font-bold text-gray-900 dark:text-white">
+              {m.heading}
+              {m.now && (
+                <span class="ml-2 align-middle font-mono text-xs font-medium text-indigo-500">● now</span>
+              )}
+            </h3>
+            <p class="mt-1 font-mono text-sm text-gray-500 dark:text-gray-400">{m.sub}</p>
+            <p class="mt-3 max-w-md text-gray-600 dark:text-gray-300 md:inline-block">{m.body}</p>
+            <div class={`mt-4 flex flex-wrap gap-2 ${i % 2 === 0 ? "md:justify-end" : ""}`}>
+              {m.tags.map((t) => (
+                <span class="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ol>
     </section>
 
-    <section class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-        Education
-      </h2>
-      <div class="space-y-8">
-        {
-          education.map((edu) => (
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <div class="flex flex-wrap items-baseline gap-x-2">
-                <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">
-                  {edu.year}
-                </span>
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                  {edu.degree}
-                </h3>
-              </div>
-              <div class="mt-2 text-gray-600 dark:text-gray-300">
-                <p>{edu.institution}</p>
-                <p>{edu.location}</p>
-                {edu.details && <p class="mt-2 text-sm">{edu.details}</p>}
-              </div>
-            </div>
-          ))
-        }
+    <!-- the stack (closing) -->
+    <section class="reveal border-t border-gray-100 py-20 dark:border-gray-800">
+      <p class="font-mono text-sm tracking-widest text-indigo-500 dark:text-indigo-400">// THE STACK TODAY</p>
+      <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
+        {skills.map((s) => (
+          <div class="rounded-2xl border border-gray-100 p-6 dark:border-gray-800">
+            <div class="text-3xl">{s.icon}</div>
+            <h3 class="mt-3 text-lg font-semibold text-gray-900 dark:text-white">{s.title}</h3>
+            <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">{s.description}</p>
+          </div>
+        ))}
       </div>
     </section>
   </main>
 </Layout>
 
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(34px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<script>
+  // Reveal each milestone as it enters the viewport.
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      }
+    },
+    { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
+  );
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+  // Fill the spine as the viewport centre travels through the timeline.
+  const timeline = document.getElementById("timeline");
+  const fill = document.getElementById("spine-fill");
+  function onScroll() {
+    if (!timeline || !fill) return;
+    const rect = timeline.getBoundingClientRect();
+    const mid = window.innerHeight * 0.5;
+    const progress = (mid - rect.top) / rect.height;
+    fill.style.height = `${Math.min(Math.max(progress, 0), 1) * 100}%`;
+  }
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+</script>
