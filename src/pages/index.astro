@@ -1,8 +1,40 @@
 ---
-import { title, description, heroImage } from "../../config/index.json";
+import config from "../../config/index.json";
 
 import Layout from "../layouts/Layout.astro";
 import Navigation from "../components/Navigation.astro";
+
+// Landing content comes from the CMS (admin.morcos.tech, site "portfolio",
+// section "landing") at build time. Best-effort: any failure falls back to the
+// checked-in config so the build always succeeds.
+const CMS_URL =
+  "https://admin.morcos.tech/api/cms/v1/sites/portfolio/content?locale=en";
+
+let landing = {
+  title: "Hello, I'm Mark Morcos!",
+  description: config.description,
+  image: config.heroImage,
+};
+
+try {
+  const res = await fetch(CMS_URL, { signal: AbortSignal.timeout(15000) });
+  if (res.ok) {
+    const l = (await res.json())?.content?.landing;
+    if (l) {
+      landing = {
+        title: l.title || landing.title,
+        description: l.description || landing.description,
+        image: l.image || landing.image,
+      };
+    }
+  } else {
+    console.warn(`CMS landing: ${CMS_URL} -> HTTP ${res.status}; using fallback`);
+  }
+} catch (err) {
+  console.warn(`CMS landing fetch failed (${err?.message}); using fallback`);
+}
+
+const { title, description } = config;
 ---
 
 <Layout {title} {description}>
@@ -31,8 +63,8 @@ import Navigation from "../components/Navigation.astro";
             >
               <div class="relative aspect-square w-full max-w-md">
                 <img
-                  src={heroImage}
-                  alt="Mark Morcos"
+                  src={landing.image}
+                  alt={landing.title}
                   class="absolute inset-0 h-full w-full rounded-2xl bg-gray-900/5 object-cover shadow-2xl"
                 />
                 <div
@@ -45,15 +77,12 @@ import Navigation from "../components/Navigation.astro";
               <h1
                 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl"
               >
-                Hello, I'm Mark Morcos!
+                {landing.title}
               </h1>
               <p
                 class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300"
               >
-                A passionate software engineer focused on creating beautiful and
-                functional web experiences. With expertise across the full stack
-                and cloud technologies, I love building scalable and
-                maintainable solutions that solve real-world problems.
+                {landing.description}
               </p>
               <div class="mt-10 flex items-center gap-x-6">
                 <a
