@@ -9,6 +9,6 @@ services:
     port: 80
 
     ingress:
-      host: morcos.tech
+      host: markmorcos.dev
       path: /
       pathType: Prefix

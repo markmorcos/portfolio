@@ -1,6 +1,6 @@
 # Mark Morcos - Portfolio
 
-My personal portfolio website built with Astro, showcasing my projects and professional experience. Visit [morcos.tech](https://morcos.tech) to see it live.
+My personal portfolio website built with Astro, showcasing my projects and professional experience. Visit [markmorcos.dev](https://markmorcos.dev) to see it live.
 
 ## 🚀 Tech Stack
 
